@@ -11,14 +11,10 @@ typedef struct {
 } ball;
 
 ball create_ball(physics_body body, float radius, float bounce) {
-  return (ball) {
-    .body = body,
-    .radius = radius,
-    .bounce = bounce
-  };
+  return (ball){.body = body, .radius = radius, .bounce = bounce};
 }
 
-void update_ball(ball* b, int w, int h, float dt, bool* buffer) {
+void update_ball(ball *b, int w, int h, float dt, bool *buffer) {
   physics_simulate(&b->body, dt);
   vf c = b->body.pos;
   float r = b->radius;

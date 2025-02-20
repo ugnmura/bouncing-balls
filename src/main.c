@@ -1,20 +1,16 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <stdbool.h>
-#include <string.h>
-#include <unistd.h>
-#include "./vec.h"
-#include "./screen.h"
-#include "./physics.h"
 #include "./ball.h"
+#include "./physics.h"
+#include "./screen.h"
+#include "./vec.h"
 #include <arpa/inet.h>
 #include <netinet/in.h>
+#include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/socket.h>
+#include <time.h>
 #include <unistd.h>
-
 
 #define WIDTH 128
 #define HEIGHT 64
@@ -30,17 +26,20 @@ int rand_range(int min, int max) {
   return r + min;
 }
 
-int run_ball(FILE* out) {
+int run_ball(FILE *out) {
   srand(time(NULL));
 
   for (int i = 0; i < BALL_N; i++) {
-    vf pos = vf_makeff(rand_range(WIDTH / 4, WIDTH / 4 * 3), rand_range(HEIGHT / 4, HEIGHT / 4 * 3));
-    vf vel = vf_makeff((float)rand_range(-100, 100) / 10.0f, (float)rand_range(-100, 100) / 10.0f);
+    vf pos = vf_makeff(rand_range(WIDTH / 4, WIDTH / 4 * 3),
+                       rand_range(HEIGHT / 4, HEIGHT / 4 * 3));
+    vf vel = vf_makeff((float)rand_range(-100, 100) / 10.0f,
+                       (float)rand_range(-100, 100) / 10.0f);
     vf acc = vf_makeff(0.0f, (float)rand_range(10, 100) / 10.0f);
 
     physics_body body = create_body(pos, vel, acc);
 
-    balls[i] = create_ball(body, (float)rand_range(10, 100) / 10.0f, (float)rand_range(70, 100) / 100.0f);
+    balls[i] = create_ball(body, (float)rand_range(10, 100) / 10.0f,
+                           (float)rand_range(70, 100) / 100.0f);
   }
 
   while (true) {
@@ -57,7 +56,6 @@ int run_ball(FILE* out) {
 
   return 0;
 }
-
 
 int main() {
   struct sockaddr_in serveraddr, clientaddr;
