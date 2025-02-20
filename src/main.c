@@ -69,7 +69,7 @@ int main() {
   serveraddr.sin_port = htons(8013);
 
   if (bind(listenfd, (struct sockaddr *)&serveraddr, sizeof(serveraddr)) < 0) {
-    fprintf(stderr, "[ERROR] Failed to bind socket: %m\n");
+    fprintf(stderr, "[ERROR] Failed to bind socket\n");
     exit(EXIT_FAILURE);
   }
 

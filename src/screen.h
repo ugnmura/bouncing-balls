@@ -11,11 +11,7 @@
 char table[5] = "._^C";
 
 void clear(FILE* f, bool* buffer, int width, int height) {
-
-  // Move back to the starting position
-  fprintf(f, "\x1b[%dD", width);
-  fprintf(f, "\x1b[%dA", height / 2);
-
+  fprintf(f, "\x1b\x63");
   memset(buffer, 0, width * height);
 }
 
