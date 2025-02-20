@@ -3,24 +3,26 @@
 
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
+#include <stdio.h>
 #include <assert.h>
 #include "./vec.h"
 
-char *table = "._^C";
+char table[5] = "._^C";
 
-void clear(bool* buffer, int width, int height) {
+void clear(FILE* f, bool* buffer, int width, int height) {
 
-  // Move back to the starting position 
-  printf("\x1b[%dD", width);
-  printf("\x1b[%dA", height / 2);
+  // Move back to the starting position
+  fprintf(f, "\x1b[%dD", width);
+  fprintf(f, "\x1b[%dA", height / 2);
 
   memset(buffer, 0, width * height);
 }
 
-void show(bool* buffer, int width, int height) {
+void show(FILE* f, bool* buffer, int width, int height) {
   assert(height % 2 == 0);
 
-  char* row_buffer = malloc(width * sizeof(char));
+  char* row_buffer = (char*)malloc(width * sizeof(char));
 
   for (int y = 0; y < height / 2; y++) {
     for (int x = 0; x < width; x++) {
@@ -30,8 +32,8 @@ void show(bool* buffer, int width, int height) {
       row_buffer[x] = table[(t<<1)|b];
     }
 
-    fwrite(row_buffer, sizeof(char), width, stdout);
-    fputs("\n", stdout);
+    fwrite(row_buffer, sizeof(char), width, f);
+    fputs("\n", f);
   }
 
   free(row_buffer);
