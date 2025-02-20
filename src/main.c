@@ -52,6 +52,7 @@ int run_ball(FILE *out) {
 
     usleep(1000 * 1000 / FPS);
     clear(out, screen_buffer, WIDTH, HEIGHT);
+    fflush(out);
   }
 
   return 0;
