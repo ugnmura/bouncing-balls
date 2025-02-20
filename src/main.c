@@ -14,7 +14,7 @@
 
 #define WIDTH 128
 #define HEIGHT 64
-#define FPS 60
+#define FPS 20
 #define DT (1.0f / FPS)
 #define BALL_N 20
 
