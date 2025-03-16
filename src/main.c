@@ -43,6 +43,8 @@ int run_ball(FILE *out) {
   }
 
   while (true) {
+    clear(out, screen_buffer, WIDTH, HEIGHT);
+
     for (int i = 0; i < BALL_N; i++) {
       update_ball(&balls[i], WIDTH, HEIGHT, DT, screen_buffer);
     }
@@ -51,8 +53,6 @@ int run_ball(FILE *out) {
     fflush(out);
 
     usleep(1000 * 1000 / FPS);
-    clear(out, screen_buffer, WIDTH, HEIGHT);
-    fflush(out);
   }
 
   return 0;
